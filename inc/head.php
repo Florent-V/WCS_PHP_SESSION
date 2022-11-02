@@ -48,6 +48,6 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="container-fluid text-right">
-        <strong>Hello Wilder !</strong>
+        <strong>Hello <?= $_SESSION['loginname'] ?? "Wilder" ?> !</strong>
     </div>
 </header>

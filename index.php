@@ -1,4 +1,29 @@
-<?php require 'inc/data/products.php'; ?>
+<?php
+require 'inc/data/products.php'; 
+
+session_start();
+
+
+if ($_SERVER["REQUEST_METHOD"] === 'GET') {
+    $order = array_map('trim', $_GET);
+    $order = array_map('htmlentities', $order);
+
+    if(!isset($order['add_to_cart']) 
+            || $order['add_to_cart'] === '' 
+            || !filter_var($order['add_to_cart'], FILTER_VALIDATE_INT)
+            || !array_key_exists(46, $catalog)
+    ) {
+        $errors['order'] = "There is a problem with your order";
+    } else {
+        array_key_exists('order', $_SESSION) ?: $_SESSION['order']=[];
+        array_key_exists($order['add_to_cart'], $_SESSION['order']) ? $_SESSION['order'][$order['add_to_cart']]++  :   $_SESSION['order'][$order['add_to_cart']]=1;
+        
+    } 
+    
+}
+
+
+?>
 <?php require 'inc/head.php'; ?>
 <section class="cookies container-fluid">
     <div class="row">

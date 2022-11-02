@@ -1,3 +1,20 @@
+<?php 
+
+$test = ['login' => 'no user login'];
+session_start();
+
+$errors = [];
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $user = array_map('trim', $_POST);
+    $user = array_map('htmlentities', $user);
+
+    $_SESSION['loginname'] = $user['loginname'];
+}
+
+//session_destroy();
+?>
 <?php require 'inc/head.php'; ?>
 <div class="container" style="margin-top:40px">
     <div class="row">
